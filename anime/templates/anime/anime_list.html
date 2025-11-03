@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime List</title>
+</head>
+<body>
+    <h1>Anime List</h1>
+    <ul>
+        {% for anime in animes %}
+            <li>
+                <a href="{% url 'anime_detail' anime.id %}">{{ anime.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

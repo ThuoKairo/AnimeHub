@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ anime.title }}</title>
+</head>
+<body>
+    <h1>{{ anime.title }}</h1>
+    <p>{{ anime.description }}</p>
+    <p>Genre: {{ anime.genre }}</p>
+    <h2>Reviews</h2>
+    <ul>
+        {% for review in reviews %}
+            <li>{{ review.user.username }}: {{ review.rating }}/10 - {{ review.review_text }}</li>
+        {% empty %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+    <h3>Add a Review</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+{% else %}
+    <p><a href="/admin/login/">Log in</a> to add a review.</p>
+{% endif %}
+
+    <a href="{% url 'anime_list' %}">Back to list</a>
+</body>
+</html>
